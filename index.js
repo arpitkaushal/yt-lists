@@ -1,26 +1,49 @@
 require('dotenv').config();             // protect API keys 
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const fs = require('fs');
+const moment = require('moment');
 
-let text__="";
+const API = google.youtube('v3');
 
-google.youtube('v3').playlistItems.list({
+let time_stamp = "\n"+moment().format('YYYY-MM-DD HH:mm:ss');
+let playlist_id = "PLLL5jGu6uy1PRBsyFjAx1IF054jhLErWx"
+let playlist_name = "";
+
+API.playlists.list({
     key: process.env.API_KEY,
     part: "snippet",
-    playlistId: "PLLL5jGu6uy1PRBsyFjAx1IF054jhLErWx",
-    maxResults: 25
-}).then(res => {
+    id: playlist_id,
+})
+// get the name of the playlist
+.then(res=>{
+    
+    playlist_name +=  res.data.items[0].snippet.title;
+    console.log(playlist_name);
+    fs.writeFile("./"+playlist_name+".txt", "" , { flag: 'a+' }, e => console.log(e) );
 
-    let results = res.data.items;
-    results.forEach(item => {
-        // console.log(`
-        // Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}
-        // `)        
-        text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
-    });
-    fs.writeFile("./temp.txt", text__, e => console.log(e) );
+})
+// get the items in the playlist
+.then(
+    
+    API.playlistItems.list({
+        key: process.env.API_KEY,
+        part: "snippet",
+        playlistId: playlist_id,
+        maxResults: 25
+    }).then(res => {
+        
+        let text__="";
+        let results = res.data.items;
 
-}).catch(e => console.log(e));
+        results.forEach(item => {
+            // console.log(`Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}`)        
+            text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
+        });
+        fs.writeFile("./"+playlist_name+".txt", "\n"+time_stamp+text__, { flag: 'a+' }, e => console.log(e) );
+
+}))
+.catch( e => console.log(e) );
+
 
 
 
