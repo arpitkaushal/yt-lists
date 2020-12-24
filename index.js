@@ -1,19 +1,30 @@
 require('dotenv').config();             // protect API keys 
-
 const {google} = require('googleapis');
-google.youtube('v3').search.list({
+const fs = require('fs');
+
+let text__="";
+
+google.youtube('v3').playlistItems.list({
     key: process.env.API_KEY,
-    part: ["snippet,contentDetails"],
-    q: "pallavi",
-    // playlistID:"PLLL5jGu6uy1PRBsyFjAx1IF054jhLErWx",
-    maxResults: 100
+    part: "snippet",
+    playlistId: "PLLL5jGu6uy1PRBsyFjAx1IF054jhLErWx",
+    maxResults: 25
 }).then(res => {
+
     let results = res.data.items;
     results.forEach(item => {
-        console.log(`\n\tTitle: ${item.snippet.title}\n\t URL: https://youtu.be/${item.id.videoId}`);
+        // console.log(`
+        // Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}
+        // `)        
+        text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
     });
+    fs.writeFile("./temp.txt", text__, e => console.log(e) );
+
 }).catch(e => console.log(e));
-    
+
+
+
+
 
 
 // Playlist I'll be working with
