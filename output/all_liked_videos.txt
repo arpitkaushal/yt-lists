@@ -1,4 +1,5 @@
-2020-12-26 11:51:05
+2020-12-26 21:34:22
+Title: Killer Queen	URL: https://youtu.be/Nzas1p0BqWc
 Title: 10 Helpful VS Code Extensions for JavaScript	URL: https://youtu.be/ezhugY8TJDU
 Title: Falling	URL: https://youtu.be/aYeuxrUNoVI
 Title: ASYNC + AWAIT (or How To Write Syncronous Looking Code, Without The Wait)	URL: https://youtu.be/BDqZLfBFeGk
@@ -36,7 +37,6 @@ Title: japanese jazz when driving on a warm night	URL: https://youtu.be/G68Q4lCM
 Title: Ryuichi Sakamoto - Blu (Tokyo Philharmonic Orchestra)	URL: https://youtu.be/pWI5aVKvkCg
 Title: Ryuichi Sakamoto- 'Merry Christmas Mr Lawrence'	URL: https://youtu.be/LGs_vGt0MY8
 Title: The Sea	URL: https://youtu.be/rOLN9T9w9kA
-Title: Killer Queen	URL: https://youtu.be/Nzas1p0BqWc
 Title: I Bleed	URL: https://youtu.be/-tebshO9wZo
 Title: Thunder	URL: https://youtu.be/3u9DdQ1TVo0
 Title: Flight319	URL: https://youtu.be/Nk4o8WCn6F4
