@@ -17,13 +17,13 @@ var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
 
 authorize(get_liked_playlist);
 
-const time_stamp = "\n"+moment().format('YYYY-MM-DD HH:mm:ss');
+const time_stamp = "\n\n\n\n\n"+moment().format('YYYY-MM-DD HH:mm:ss');
 const channel_id = "UClRH--NY6qebbMDMkXzxOBQ"
 
 // get all the liked videos by a channel
 async function get_liked_playlist(authkey){
     
-    fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
+    fs.writeFile("./output/"+"all_liked_songs"+".txt", time_stamp, { flag: 'a+' }, e => { if(e) console.log(e);} );
     let nextPageToken_ = null;
     let text__ = "";
     let i = 0;
@@ -35,7 +35,7 @@ async function get_liked_playlist(authkey){
             auth: authkey,
             part: "snippet",
             maxResults: 50,  // 50 is the max value
-            playlistId: "LL",
+            playlistId: "LM", // posibble values: LL: to get liked videos, LM: to get liked songs on youtube music 
             pageToken: nextPageToken_
         })
         .then(res => {
@@ -48,13 +48,13 @@ async function get_liked_playlist(authkey){
             });
             // console.log("items done: "+i+"\tnextPageToken: "+nextPageToken_);
         })
-        .then( fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); }) )
+        .then( fs.writeFile("./output/"+"all_liked_songs"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); }) )
         .then( text__ = "" )
         .catch( e => console.log("error here\t" + e) )
         
     } while (nextPageToken_ != null)
 
-    if(text__.length>1) fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); });
+    if(text__.length>1) fs.writeFile("./output/"+"all_liked_songs"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); });
 
 }
 
