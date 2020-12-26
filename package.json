@@ -4,6 +4,7 @@
   "description": "A CLI app to make and create playlists",
   "main": "index.js",
   "dependencies": {
+    "deasync": "^0.1.21",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "g": "^2.0.1",

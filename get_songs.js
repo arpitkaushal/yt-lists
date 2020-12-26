@@ -19,7 +19,7 @@ API.playlists.list({
     
     playlist_name +=  res.data.items[0].snippet.title;
     console.log(playlist_name);
-    fs.writeFile("./"+playlist_name+".txt", "" , { flag: 'a+' }, e => console.log(e) );
+    fs.writeFile("./output/"+playlist_name+".txt", "" , { flag: 'a+' }, e => console.log(e) );
 
 })
 // get the items in the playlist
@@ -29,9 +29,10 @@ API.playlists.list({
         key: process.env.API_KEY,
         part: "snippet",
         playlistId: playlist_id,
-        maxResults: 25
+        maxResults: 5
     }).then(res => {
         
+        console.log(res);
         let text__="";
         let results = res.data.items;
 
@@ -39,7 +40,7 @@ API.playlists.list({
             // console.log(`Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}`)        
             text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
         });
-        fs.writeFile("./"+playlist_name+".txt", "\n"+time_stamp+text__, { flag: 'a+' }, e => console.log(e) );
+        fs.writeFile("./output/"+playlist_name+".txt", "\n"+time_stamp+text__, { flag: 'a+' }, e => console.log(e) );
 
 }))
 .catch( e => console.log(e) );
