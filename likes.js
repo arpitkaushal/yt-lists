@@ -15,9 +15,50 @@ const scopes = [
 var TOKEN_DIR = '\\.credentials\\';
 var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
 
-// authorize(get_liked_videos);
-// authorize(get_channel_videos);
 authorize(get_liked_playlist);
+
+const time_stamp = "\n"+moment().format('YYYY-MM-DD HH:mm:ss');
+const channel_id = "UClRH--NY6qebbMDMkXzxOBQ"
+
+// get all the liked videos by a channel
+async function get_liked_playlist(authkey){
+    
+    fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
+    let nextPageToken_ = null;
+    let text__ = "";
+    let i = 0;
+
+    do {
+
+        await API.playlistItems.list({
+            key: process.env.API_KEY,
+            auth: authkey,
+            part: "snippet",
+            maxResults: 50,  // 50 is the max value
+            playlistId: "LL",
+            pageToken: nextPageToken_
+        })
+        .then(res => {
+            let results = res.data.items;
+            nextPageToken_ = res.data.nextPageToken;
+            results.forEach(item => {
+                // console.log(`Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}`)        
+                i++;
+                text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
+            });
+            // console.log("items done: "+i+"\tnextPageToken: "+nextPageToken_);
+        })
+        .then( fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); }) )
+        .then( text__ = "" )
+        .catch( e => console.log("error here\t" + e) )
+        
+    } while (nextPageToken_ != null)
+
+    if(text__.length>1) fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); });
+
+}
+
+// stackoverflow answer - https://stackoverflow.com/a/65453774/12864172
 
 // Create an OAuth2 client with the given credentials, and then execute the given callback function.
 function authorize(callback) {
@@ -77,119 +118,3 @@ fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
     console.log('Token stored to ' + TOKEN_PATH);
 });
 }
-
-
-const time_stamp = "\n"+moment().format('YYYY-MM-DD HH:mm:ss');
-const channel_id = "UClRH--NY6qebbMDMkXzxOBQ"
-
-function get_liked_videos(authkey){
-    
-    // get all the liked videos
-    fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
-    let nextPageToken = '';
-
-    while(nextPageToken!=null){
-        
-        API.videos.list({
-            key: process.env.API_KEY,
-            auth: authkey,
-            part: ["snippet,contentDetails"],
-            maxResults: 50,  // 50 is the max value
-            // id: channel_id,
-            // mine:true
-            myRating:"like",
-            pageToken: nextPageToken
-        })
-        .then(res => {
-            console.log(res);
-            nextPageToken = res.data.nextPageToken;
-            console.log(nextPageToken);
-            let results = res.data.items;
-            let text__ = "";
-            results.forEach(item => {
-                console.log(`URL: https://youtu.be/${item.id}`)  
-                // text__ += "\nURL: https://youtu.be/"+item.id;
-                // fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
-            });
-        })
-        .catch(e => console.log(e));
-
-    }
-
-}
-
-function get_channel_videos(authkey){
-    
-    // get all the liked videos
-    // fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
-    // let nextPageToken = '';
-
-    // while(nextPageToken!=null){
-        
-        API.channels.list({
-            key: process.env.API_KEY,
-            auth: authkey,
-            part: "snippet,contentDetails",
-            maxResults: 50,  // 50 is the max value
-            mine:true
-            // id: channel_id,
-            // pageToken: nextPageToken
-        })
-        .then(res => {
-            console.log(res.data.items[0].snippet);
-            console.log(res.data.items[0].contentDetails);
-            // nextPageToken = res.data.nextPageToken;
-            // console.log(nextPageToken);
-            // let results = res.data.items;
-            // let text__ = "";
-            // results.forEach(item => {
-                // console.log(`URL: https://youtu.be/${item.id}`)  
-                // text__ += "\nURL: https://youtu.be/"+item.id;
-                // fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
-            // });
-        })
-        .catch(e => console.log(e));
-
-    // }
-
-}
-
-// get all the liked videos by a channel
-async function get_liked_playlist(authkey){
-    
-    fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
-    let nextPageToken_ = null;
-    let text__ = "";
-    let i = 0;
-
-    do {
-
-        await API.playlistItems.list({
-            key: process.env.API_KEY,
-            auth: authkey,
-            part: "snippet",
-            maxResults: 50,  // 50 is the max value
-            playlistId: "LL",
-            pageToken: nextPageToken_
-        })
-        .then(res => {
-            let results = res.data.items;
-            nextPageToken_ = res.data.nextPageToken;
-            results.forEach(item => {
-                // console.log(`Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}`)        
-                i++;
-                text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
-            });
-            // console.log("items done: "+i+"\tnextPageToken: "+nextPageToken_);
-        })
-        .then( fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); }) )
-        .then( text__ = "" )
-        .catch( e => console.log("error here\t" + e) )
-        
-    } while (nextPageToken_ != null)
-
-    if(text__.length>1) fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); });
-
-}
-
-// stackoverflow answer - https://stackoverflow.com/a/65453774/12864172
