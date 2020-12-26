@@ -19,7 +19,8 @@ authorize(get_liked_playlist);
 
 const time_stamp = "\n\n\n\n\n"+moment().format('YYYY-MM-DD HH:mm:ss');
 const channel_id = "UClRH--NY6qebbMDMkXzxOBQ"
-var save__file = "./output/"+"all_liked_videos"+".txt"; 
+var save__file = "../output/"+"all_liked_"+"songs"+".txt"; 
+
 // get all the liked videos by a channel
 async function get_liked_playlist(authkey){
     
@@ -35,7 +36,7 @@ async function get_liked_playlist(authkey){
             auth: authkey,
             part: "snippet",
             maxResults: 50,  // 50 is the max value
-            playlistId: "LL", // posibble values: LL: to get liked videos, LM: to get liked songs on youtube music 
+            playlistId: "LM", // posibble values: LL: to get liked videos, LM: to get liked songs on youtube music 
             pageToken: nextPageToken_
         })
         .then(res => {
