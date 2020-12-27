@@ -1,0 +1,33 @@
+
+
+
+
+
+2020-12-27 11:08:45
+Title: Python Pandas Tutorial (Part 1): Getting Started with Data Analysis - Installation and Loading Data	URL: https://youtu.be/ZyhVh-qRZPA
+Title: Python Pandas Tutorial (Part 2): DataFrame and Series Basics - Selecting Rows and Columns	URL: https://youtu.be/zmdjNSmRXF4
+Title: Python Pandas Tutorial (Part 3): Indexes - How to Set, Reset, and Use Indexes	URL: https://youtu.be/W9XjRYFkkyw
+Title: Python Pandas Tutorial (Part 4): Filtering - Using Conditionals to Filter Rows and Columns	URL: https://youtu.be/Lw2rlcxScZY
+Title: Python Pandas Tutorial (Part 5): Updating Rows and Columns - Modifying Data Within DataFrames	URL: https://youtu.be/DCDe29sIKcE
+Title: Python Pandas Tutorial (Part 6): Add/Remove Rows and Columns From DataFrames	URL: https://youtu.be/HQ6XO9eT-fc
+Title: Python Pandas Tutorial (Part 7): Sorting Data	URL: https://youtu.be/T11QYVfZoD0
+Title: Python Pandas Tutorial (Part 8): Grouping and Aggregating - Analyzing and Exploring Your Data	URL: https://youtu.be/txMdrV1Ut64
+Title: Python Pandas Tutorial (Part 9): Cleaning Data - Casting Datatypes and Handling Missing Values	URL: https://youtu.be/KdmPHEnPJPs
+Title: Python Pandas Tutorial (Part 10): Working with Dates and Time Series Data	URL: https://youtu.be/UFuo7EHI8zc
+Title: Python Pandas Tutorial (Part 11): Reading/Writing Data to Different Sources - Excel, JSON, SQL, Etc	URL: https://youtu.be/N6hyN6BW6ao
+
+
+
+
+2020-12-27 11:17:39
+Title: Python Pandas Tutorial (Part 1): Getting Started with Data Analysis - Installation and Loading Data	URL: https://youtu.be/ZyhVh-qRZPA
+Title: Python Pandas Tutorial (Part 2): DataFrame and Series Basics - Selecting Rows and Columns	URL: https://youtu.be/zmdjNSmRXF4
+Title: Python Pandas Tutorial (Part 3): Indexes - How to Set, Reset, and Use Indexes	URL: https://youtu.be/W9XjRYFkkyw
+Title: Python Pandas Tutorial (Part 4): Filtering - Using Conditionals to Filter Rows and Columns	URL: https://youtu.be/Lw2rlcxScZY
+Title: Python Pandas Tutorial (Part 5): Updating Rows and Columns - Modifying Data Within DataFrames	URL: https://youtu.be/DCDe29sIKcE
+Title: Python Pandas Tutorial (Part 6): Add/Remove Rows and Columns From DataFrames	URL: https://youtu.be/HQ6XO9eT-fc
+Title: Python Pandas Tutorial (Part 7): Sorting Data	URL: https://youtu.be/T11QYVfZoD0
+Title: Python Pandas Tutorial (Part 8): Grouping and Aggregating - Analyzing and Exploring Your Data	URL: https://youtu.be/txMdrV1Ut64
+Title: Python Pandas Tutorial (Part 9): Cleaning Data - Casting Datatypes and Handling Missing Values	URL: https://youtu.be/KdmPHEnPJPs
+Title: Python Pandas Tutorial (Part 10): Working with Dates and Time Series Data	URL: https://youtu.be/UFuo7EHI8zc
+Title: Python Pandas Tutorial (Part 11): Reading/Writing Data to Different Sources - Excel, JSON, SQL, Etc	URL: https://youtu.be/N6hyN6BW6ao

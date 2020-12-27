@@ -5,7 +5,6 @@ const fs = require('fs');
 const moment = require('moment');
 const readline = require('readline');
 
-const API = google.youtube('v3');
 const scopes = [
     "https://www.googleapis.com/auth/youtube",
     "https://www.googleapis.com/auth/youtube.readonly",
@@ -15,7 +14,7 @@ var TOKEN_DIR = '\\.credentials\\';
 var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
 
 // Create an OAuth2 client with the given credentials, and then execute the given callback function.
-export function authorize(callback) {
+const authorize = ( callback ) => {
     var clientSecret = process.env.CLIENT_SECRET;
     var clientId = process.env.CLIENT_ID;
     var redirectUrl = process.env.REDIRECT_URL;
@@ -34,7 +33,7 @@ export function authorize(callback) {
 
 // Get and store new token after prompting for user authorization, and then 
 // execute the given callback with the authorized OAuth2 client.
-export function getNewToken(oauth2Client, callback) {
+const getNewToken = (oauth2Client, callback) => {
     var authUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: scopes
@@ -59,16 +58,18 @@ export function getNewToken(oauth2Client, callback) {
 }
 
 // Store token to disk be used in later program executions.
-export function storeToken(token) {
-try {
-    fs.mkdirSync(TOKEN_DIR);
-} catch (err) {
-    if (err.code != 'EEXIST') {
-    throw err;
-    }
+const storeToken = (token) => {
+  try {
+      fs.mkdirSync(TOKEN_DIR);
+  } catch (err) {
+      if (err.code != 'EEXIST') {
+      throw err;
+      }
+  }
+  fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+      if (err) throw err;
+      console.log('Token stored to ' + TOKEN_PATH);
+  });
 }
-fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-    if (err) throw err;
-    console.log('Token stored to ' + TOKEN_PATH);
-});
-}
+
+exports.authorize =  authorize;
