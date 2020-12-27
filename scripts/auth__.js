@@ -4,7 +4,6 @@ const OAuth2 = google.auth.OAuth2;
 const fs = require('fs');
 const moment = require('moment');
 const readline = require('readline');
-const deasync = require('deasync');
 
 const API = google.youtube('v3');
 const scopes = [
@@ -15,54 +14,8 @@ const scopes = [
 var TOKEN_DIR = '\\.credentials\\';
 var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
 
-authorize(get_liked_playlist);
-
-const time_stamp = "\n\n\n\n\n"+moment().format('YYYY-MM-DD HH:mm:ss');
-const channel_id = "UClRH--NY6qebbMDMkXzxOBQ"
-var save__file = "../output/"+"all_liked_"+"songs"+".txt"; 
-
-// get all the liked videos by a channel
-async function get_liked_playlist(authkey){
-    
-    fs.writeFile(save__file, time_stamp, { flag: 'a+' }, e => { if(e) console.log(e);} );
-    let nextPageToken_ = null;
-    let text__ = "";
-    let i = 0;
-
-    do {
-
-        await API.playlistItems.list({
-            key: process.env.API_KEY,
-            auth: authkey,
-            part: "snippet",
-            maxResults: 50,  // 50 is the max value
-            playlistId: "LM", // posibble values: LL: to get liked videos, LM: to get liked songs on youtube music 
-            pageToken: nextPageToken_
-        })
-        .then(res => {
-            let results = res.data.items;
-            nextPageToken_ = res.data.nextPageToken;
-            results.forEach(item => {
-                // console.log(`Title: ${item.snippet.title}\tURL: https://youtu.be/${item.snippet.resourceId.videoId}`)        
-                i++;
-                text__ += "\nTitle: "+item.snippet.title+"\tURL: https://youtu.be/"+item.snippet.resourceId.videoId;
-            });
-            // console.log("items done: "+i+"\tnextPageToken: "+nextPageToken_);
-        })
-        .then( fs.writeFile(save__file, text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); }) )
-        .then( text__ = "" )
-        .catch( e => console.log("error here\t" + e) )
-        
-    } while (nextPageToken_ != null)
-
-    if(text__.length>1) fs.writeFile(save__file, text__ , { flag: 'a+' }, e => { if(e) console.log("error with fs\t"+e); });
-
-}
-
-// stackoverflow answer - https://stackoverflow.com/a/65453774/12864172
-
 // Create an OAuth2 client with the given credentials, and then execute the given callback function.
-function authorize(callback) {
+export function authorize(callback) {
     var clientSecret = process.env.CLIENT_SECRET;
     var clientId = process.env.CLIENT_ID;
     var redirectUrl = process.env.REDIRECT_URL;
@@ -81,7 +34,7 @@ function authorize(callback) {
 
 // Get and store new token after prompting for user authorization, and then 
 // execute the given callback with the authorized OAuth2 client.
-function getNewToken(oauth2Client, callback) {
+export function getNewToken(oauth2Client, callback) {
     var authUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: scopes
@@ -104,9 +57,9 @@ function getNewToken(oauth2Client, callback) {
       });
     });
 }
-  
+
 // Store token to disk be used in later program executions.
-function storeToken(token) {
+export function storeToken(token) {
 try {
     fs.mkdirSync(TOKEN_DIR);
 } catch (err) {

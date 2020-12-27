@@ -1,7 +1,7 @@
 function get_liked_videos(authkey){
     
     // get all the liked videos
-    fs.writeFile("../output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
+    fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
     let nextPageToken = '';
 
     while(nextPageToken!=null){
@@ -25,7 +25,7 @@ function get_liked_videos(authkey){
             results.forEach(item => {
                 console.log(`URL: https://youtu.be/${item.id}`)  
                 // text__ += "\nURL: https://youtu.be/"+item.id;
-                // fs.writeFile("../output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
+                // fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
             });
         })
         .catch(e => console.log(e));
@@ -37,7 +37,7 @@ function get_liked_videos(authkey){
 function get_channel_videos(authkey){
     
     // get all the liked videos
-    // fs.writeFile("../output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
+    // fs.writeFile("./output/"+"all_liked_videos"+".txt", "\n"+time_stamp, { flag: 'a+' }, e => console.log(e) );
     // let nextPageToken = '';
 
     // while(nextPageToken!=null){
@@ -61,7 +61,7 @@ function get_channel_videos(authkey){
             // results.forEach(item => {
                 // console.log(`URL: https://youtu.be/${item.id}`)  
                 // text__ += "\nURL: https://youtu.be/"+item.id;
-                // fs.writeFile("../output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
+                // fs.writeFile("./output/"+"all_liked_videos"+".txt", text__ , { flag: 'a+' }, e => console.log(e) );
             // });
         })
         .catch(e => console.log(e));
