@@ -16,8 +16,14 @@
    1. Ask the user to make their liked videos public for a little while (till the app extarcts the video titles and links), or clone it and make that public. 
       1. They then give the link to the parent playlist.
    2. Same as Step 2 in the `With OAuth` section above.
-   2. Same as Step 3 in the `With OAuth` section above.
-   3. 
+   3. Same as Step 3 in the `With OAuth` section above.
+
+3. Some random features to add - 
+   1. Download - using youtube-dl script 
+      1. a random set of songs from a playlist or from all playlists
+      2. top (or most recent) 20% songs
+      3. bootom (or oldest) 20% songs
+   2. Store user data in json files, make incremental changes possible, so if playlist updated shouldn't have to retrieve all of it again, APPEND 
 
 
 ## Phase 2 - Web-App
